@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MSAssignmentWebApplication.Models;
 
-public partial class EcomStepMediaContext : DbContext
+public partial class EcomStepMediaContext4 : DbContext
 {
-    public EcomStepMediaContext()
+    public EcomStepMediaContext4()
     {
     }
 
-    public EcomStepMediaContext(DbContextOptions<EcomStepMediaContext> options)
+    public EcomStepMediaContext4(DbContextOptions<EcomStepMediaContext4> options)
         : base(options)
     {
     }

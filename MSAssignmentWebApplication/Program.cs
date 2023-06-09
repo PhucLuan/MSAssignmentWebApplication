@@ -1,5 +1,7 @@
+using Business;
 using Microsoft.EntityFrameworkCore;
 using MSAssignmentWebApplication.Models;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,8 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<EcomStepMediaContext>(
-        options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+//builder.Services.AddDbContext<EcomStepMediaContext>(
+//        options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+builder.Services.AddBusinessLayer(builder.Configuration);
 
 builder.Services.AddCors(options =>
 {
