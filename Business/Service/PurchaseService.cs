@@ -23,23 +23,29 @@ namespace Business.Service
             _productRepository = productRepository;
             _purchaseRepository = purchaseRepository;
         }
+        public enum LowerLimit
+        {
+            shopCount = 3,
+            customerCount = 30,
+            productCount = 3000,
+        }
 
         public async Task<IEnumerable<PurchaseDTO>> GetPurchasesData(string? productName)
         {
             var shopCount = await _shopRepository.Entities.AsNoTracking().CountAsync();
-            if (shopCount < 3)
+            if (shopCount < (int)LowerLimit.shopCount)
             {
                 throw new ArgumentException("Insufficient Data");
             }
 
             var customerCount = await _customerRepository.Entities.AsNoTracking().CountAsync();
-            if (customerCount < 30)
+            if (customerCount < (int)LowerLimit.customerCount)
             {
                 throw new ArgumentException("Insufficient Data");
             }
 
             var productCount = await _productRepository.Entities.AsNoTracking().CountAsync();
-            if (productCount < 3000)
+            if (productCount < (int)LowerLimit.productCount)
             {
                 throw new ArgumentException("Insufficient Data");
             }
