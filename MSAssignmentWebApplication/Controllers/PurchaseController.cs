@@ -16,9 +16,9 @@ namespace MSAssignmentWebApplication.Controllers
         {
             _context = context;
         }
-        [Route("GetSortedData")]
+        [Route("GetPurchasesData")]
         [HttpGet]
-        public async Task<ActionResult> GetSortedData(string? productName)
+        public async Task<ActionResult> GetPurchasesData(string? productName)
         {
             var shopCount = await _context.Shops.AsNoTracking().CountAsync();
             if (shopCount < 3)

@@ -22,17 +22,24 @@ namespace MSAssignmentWebApplication.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(long? shopid)
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(long? shopid, string? productname)
         {
           if (_context.Products == null)
           {
               return NotFound();
           }
+            var queryResult = _context.Products.AsQueryable();//.OrderByDescending(x => x.ProductId);
+
             if (shopid != null)
             {
-                return await _context.Products.Where(x => x.ShopId == shopid).ToListAsync();
+                queryResult = queryResult.Where(x => x.ShopId == shopid);
             }
-            return await _context.Products.ToListAsync();
+
+            if (!String.IsNullOrEmpty(productname))
+            {
+                queryResult = queryResult.Where(x => x.Name!.Contains(productname));
+            }
+            return await queryResult.OrderByDescending(x => x.ProductId).ToListAsync();
         }
 
         // GET: api/Products/5

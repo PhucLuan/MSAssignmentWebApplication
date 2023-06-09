@@ -13,7 +13,7 @@ public partial class Product
 
     public long? ShopId { get; set; }
 
-    public virtual ICollection<Purchase> Purchases { get; set; } = new List<Purchase>();
+    public virtual ICollection<Purchase>? Purchases { get; set; } = new List<Purchase>();
 
     public virtual Shop? Shop { get; set; }
 }
