@@ -28,17 +28,18 @@ namespace MSAssignmentWebApplication.Controllers
           {
               return NotFound();
           }
-            return await _context.Shops.ToListAsync();
+            return await _context.Shops.OrderByDescending(x => x.ShopId).ToListAsync();
         }
 
-        // GET: api/Shops/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Shop>> GetShop(long id)
+        // GET: api/GetShopName
+        //[Route("GetShopName")]
+        [HttpGet("GetShopName/{id}")]
+        public async Task<ActionResult<string>> GetShopName(long id)
         {
-          if (_context.Shops == null)
-          {
-              return NotFound();
-          }
+            if (_context.Shops == null)
+            {
+                return NotFound();
+            }
             var shop = await _context.Shops.FindAsync(id);
 
             if (shop == null)
@@ -46,8 +47,26 @@ namespace MSAssignmentWebApplication.Controllers
                 return NotFound();
             }
 
-            return shop;
+            return shop.Name!;
         }
+
+        //// GET: api/Shops/5
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Shop>> GetShop(long id)
+        //{
+        //  if (_context.Shops == null)
+        //  {
+        //      return NotFound();
+        //  }
+        //    var shop = await _context.Shops.FindAsync(id);
+
+        //    if (shop == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return shop;
+        //}
 
         // PUT: api/Shops/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

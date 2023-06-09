@@ -13,6 +13,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EcomStepMediaContext>(
         options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSPA", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000") // Replace with the URL of your SPA
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
@@ -24,6 +33,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowSPA");
 
 app.UseAuthorization();
 

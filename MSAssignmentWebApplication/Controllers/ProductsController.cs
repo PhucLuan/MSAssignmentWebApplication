@@ -22,12 +22,16 @@ namespace MSAssignmentWebApplication.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts(long? shopid)
         {
           if (_context.Products == null)
           {
               return NotFound();
           }
+            if (shopid != null)
+            {
+                return await _context.Products.Where(x => x.ShopId == shopid).ToListAsync();
+            }
             return await _context.Products.ToListAsync();
         }
 

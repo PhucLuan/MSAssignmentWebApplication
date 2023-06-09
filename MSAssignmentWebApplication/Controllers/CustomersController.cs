@@ -28,7 +28,7 @@ namespace MSAssignmentWebApplication.Controllers
           {
               return NotFound();
           }
-            return await _context.Customers.ToListAsync();
+            return await _context.Customers.OrderByDescending(x => x.CustomerId).ToListAsync();
         }
 
         // GET: api/Customers/5
